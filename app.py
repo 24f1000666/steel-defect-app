@@ -10,7 +10,7 @@ from huggingface_hub import hf_hub_download
 import streamlit as st
 
 
-HF_REPO_ID = "terminator1140/steel-defect-unetp"
+HF_REPO_ID = "terminator1140/steel-defect-unetpp"
 MODEL_FILENAME = "unetpp_effb3_scse_best.pt"
 
 IMG_HEIGHT, IMG_WIDTH = 128, 800
