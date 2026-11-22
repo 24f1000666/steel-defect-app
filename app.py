@@ -9,7 +9,6 @@ import segmentation_models_pytorch as smp
 from huggingface_hub import hf_hub_download
 import streamlit as st
 
-
 HF_REPO_ID = "terminator1140/steel-defect-unetpp"
 MODEL_FILENAME = "unetpp_effb3_scse_best.pt"
 
@@ -90,6 +89,7 @@ def predict_defects(model, img_rgb, threshold=0.40, use_tta=True):
             probs = p0[0].numpy()
 
     base_rgb = cv2.cvtColor(gray, cv2.COLOR_GRAY2RGB)
+    orig_rgb = base_rgb.copy()
     overlay = base_rgb.copy()
     summary_rows = []
 
@@ -124,7 +124,7 @@ def predict_defects(model, img_rgb, threshold=0.40, use_tta=True):
         })
 
     blended = cv2.addWeighted(base_rgb, 0.72, overlay, 0.28, 0)
-    return base_rgb, blended, pd.DataFrame(summary_rows)
+    return orig_rgb, blended, pd.DataFrame(summary_rows)
 
 
 st.title("Industrial Steel Surface Defect Segmentation")
